@@ -11,7 +11,6 @@ public class Leitores_Escritores {
     static int leitoresEsperando = 0;
     static int number = 0;
     public static int espaco_compartilhado = 0;
-    static int rc = 0;
 
     public static int getEspaco(){
         return espaco_compartilhado;
@@ -58,12 +57,7 @@ public class Leitores_Escritores {
 	public static void setEspaco_compartilhado(int espaco_compartilhado) {
 		Leitores_Escritores.espaco_compartilhado = espaco_compartilhado;
 	}
-	public static int getRc() {
-		return rc;
-	}
-	public static void setRc(int rc) {
-		Leitores_Escritores.rc = rc;
-	}
+
 	static Semaphore Leia = new Semaphore(1);
 	
 	public static Semaphore getMutex() {

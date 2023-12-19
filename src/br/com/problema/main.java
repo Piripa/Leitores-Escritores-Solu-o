@@ -1,7 +1,5 @@
 package br.com.problema;
 
-import java.math.*;
-import java.util.concurrent.Semaphore;
 
 class main {
     public static void main(String[] args) {

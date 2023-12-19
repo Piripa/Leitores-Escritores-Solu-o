@@ -1,19 +1,16 @@
 package br.com.problema;
 
-import java.util.concurrent.Semaphore;
-
 public class Leitor extends Thread {
-	Leitores_Escritores leitorEscritor = new Leitores_Escritores();
     public void run() {
         while (true) {
             try {
                 Thread.sleep((int) (Math.random() * 100));
-                leitorEscritor.Leia.acquire();
-                leitorEscritor.mutex.acquire();
+                Leitores_Escritores.Leia.acquire();
+                Leitores_Escritores.mutex.acquire();
 
-                System.out.println("Leitor leu : " + leitorEscritor.getEspaco());
+                System.out.println("Leitor leu : " + Leitores_Escritores.getEspaco());
                 
-                leitorEscritor.mutex.release();
+                Leitores_Escritores.mutex.release();
 
             } catch (InterruptedException ex) {
                 ex.printStackTrace();

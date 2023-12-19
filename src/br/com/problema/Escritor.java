@@ -1,33 +1,31 @@
 package br.com.problema;
-import java.util.concurrent.Semaphore;
 
 class Escritor extends Thread {
-	Leitores_Escritores leitorEscritor = new Leitores_Escritores();
     public void run() {
         while (true) {
             try {
                 Thread.sleep((int) (Math.random() * 1000));
-                leitorEscritor.mutex.acquire();
+                Leitores_Escritores.mutex.acquire();
                 // escritoresEsperando++;
 
                 System.out.println("Algum escritor irá escrever");
                 
-                if(leitorEscritor.escritoresEscrevendo == 0 ){
-                	leitorEscritor.escritoresEscrevendo++;
-                	leitorEscritor.db.acquire();
+                if(Leitores_Escritores.escritoresEscrevendo == 0 ){
+                	Leitores_Escritores.escritoresEscrevendo++;
+                	Leitores_Escritores.db.acquire();
                     Thread.sleep((int) (Math.random() * 1000));
 
-                    leitorEscritor.number++;
-                    leitorEscritor.setEspaco(leitorEscritor.number);
-                    System.out.println("Escritor escreveu : " + leitorEscritor.number);
+                    Leitores_Escritores.number++;
+                    Leitores_Escritores.setEspaco(Leitores_Escritores.number);
+                    System.out.println("Escritor escreveu : " + Leitores_Escritores.number);
 
 
-                    leitorEscritor.db.release();
-                    leitorEscritor.escritoresEscrevendo--;
+                    Leitores_Escritores.db.release();
+                    Leitores_Escritores.escritoresEscrevendo--;
                     System.out.println("Escritor Terminou de escrever" );
                 }
-                leitorEscritor.Leia.release();
-                leitorEscritor.mutex.release();
+                Leitores_Escritores.Leia.release();
+                Leitores_Escritores.mutex.release();
 
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
