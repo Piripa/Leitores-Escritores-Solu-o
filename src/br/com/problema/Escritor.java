@@ -1,6 +1,7 @@
 package br.com.problema;
 
 class Escritor extends Thread {
+	 int C_Leitor = 0;
     public void run() {
         while (true) {
             try {
@@ -12,12 +13,13 @@ class Escritor extends Thread {
                 
                 if(Leitores_Escritores.escritoresEscrevendo == 0 ){
                 	Leitores_Escritores.escritoresEscrevendo++;
+                	C_Leitor++;
                 	Leitores_Escritores.db.acquire();
                     Thread.sleep((int) (Math.random() * 1000));
 
                     Leitores_Escritores.number++;
                     Leitores_Escritores.setEspaco(Leitores_Escritores.number);
-                    System.out.println("Escritor escreveu : " + Leitores_Escritores.number);
+                    System.out.println("Leitor "+ C_Leitor +" leu : " + Leitores_Escritores.number);
 
 
                     Leitores_Escritores.db.release();
